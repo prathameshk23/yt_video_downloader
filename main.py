@@ -7,7 +7,7 @@ def download_video():
     try:
         yt = link.get()
         yt = YouTube(yt, on_progress_callback=on_progress)
-        video = yt.streams.get_highest_resolution()
+        video = yt.streams.get_by_resolution(resolution)
         title.configure(text=yt.title)
         finished.configure(text="Download finished")
         video.download()
@@ -40,6 +40,15 @@ title.pack(padx=10, pady=10)
 url = tkinter.StringVar()
 link = customtkinter.CTkEntry(root, width=345, height=40, textvariable=url)
 link.pack()
+
+title = customtkinter.CTkLabel(
+    root, text="Enter Resolution", font=("Arial", 20))
+title.pack(padx=10, pady=10)
+
+resolution = tkinter.StringVar()
+resolv = customtkinter.CTkEntry(
+    root, width=345, height=40, textvariable=resolution)
+resolv.pack(padx=10, pady=10)
 
 finished = customtkinter.CTkLabel(root, text="")
 finished.pack(padx=10, pady=10)
